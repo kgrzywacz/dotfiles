@@ -1,0 +1,6 @@
+platform='uname'
+if [[ $platform == 'Linux' ]]; then
+    alias go='gnome-open' 
+fi
+alias l='ls -lrth --color'
+alias irssi='TERM=screen irssi'
