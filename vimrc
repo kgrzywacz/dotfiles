@@ -54,21 +54,21 @@ colorscheme solarized
 
 " vim-force.com plugin settings:
 if has("unix")
-    let g:apex_tooling_force_dot_com_path = "/home/kamil/jars/tooling-force.com.jar"
+    let g:apex_tooling_force_dot_com_path = "/Users/kamil/jars/tooling-force.com.jar"
     if !exists("g:apex_backup_folder")
-        let g:apex_backup_folder = "/home/kamil/sfdev/backup"
+        let g:apex_backup_folder = "/Users/kamil/sfdev/backup"
     endif
  	if !exists("g:apex_temp_folder")
  		" full path required here, relative may not work
- 		let g:apex_temp_folder="/home/kamil/sfdev/temp"
+ 		let g:apex_temp_folder="/Users/kamil/sfdev/temp"
  	endif
  	if !exists("g:apex_properties_folder")
  		" full path required here, relative may not work
- 		let g:apex_properties_folder="/home/kamil/sfdev/settings"
+ 		let g:apex_properties_folder="/Users/kamil/sfdev/settings"
  	endif
  	if !exists("g:apex_workspace_path")
  		" full path required here, relative may not work
- 		let g:apex_workspace_path="/home/kamil/sfdev/workspaces"
+ 		let g:apex_workspace_path="/Users/kamil/sfdev/workspaces"
  	endif
     if !exists("g:apex_test_logType")
         let g:apex_test_logType="Debugonly"
