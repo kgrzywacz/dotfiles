@@ -1,6 +1,8 @@
 platform='uname'
 if [[ $platform == 'Linux' ]]; then
     alias go='gnome-open' 
+    alias l='ls -lrth --color'
+elif [[ $platform == 'Darwin' ]]; then
+    alias l='ls -lrthG'
 fi
-alias l='ls -lrth --color'
-alias irssi='TERM=screen irssi'
+# alias irssi='TERM=screen irssi'
