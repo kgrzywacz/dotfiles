@@ -1,8 +1,14 @@
-platform='uname'
+platform=`uname`
 if [[ $platform == 'Linux' ]]; then
-    alias go='gnome-open' 
     alias l='ls -lrth --color'
+    alias go='gnome-open' 
 elif [[ $platform == 'Darwin' ]]; then
     alias l='ls -lrthG'
 fi
+
+alias vs='vim ~/sfdev/workspaces/'
+alias cd..='cd ..'
+alias rc='. ~/.zshrc'
+alias v='vim'
+alias vi='vim'
 # alias irssi='TERM=screen irssi'
