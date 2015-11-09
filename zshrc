@@ -1,3 +1,10 @@
+# oh-my-zsh stuff
+export ZSH=/Users/kamil/.oh-my-zsh
+ZSH_THEME="agnoster"
+plugins=(git zsh-syntax-highlighting)
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+source $ZSH/oh-my-zsh.sh
+
 # want your terminal to support 256 color schemes? I do ...
 export TERM="xterm-256color"
 
