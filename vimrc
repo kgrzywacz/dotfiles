@@ -23,7 +23,7 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+" set expandtab
 
 " Sets working direcotry to current file's dir
 set autochdir
@@ -56,19 +56,19 @@ colorscheme solarized
 if has("unix")
     let g:apex_tooling_force_dot_com_path = "/Users/kamil/jars/tooling-force.com.jar"
     if !exists("g:apex_backup_folder")
-        let g:apex_backup_folder = "/Users/kamil/sfdev/backup"
+        let g:apex_backup_folder = "/Users/kamil/dev/vim-force.com/backup"
     endif
  	if !exists("g:apex_temp_folder")
  		" full path required here, relative may not work
- 		let g:apex_temp_folder="/Users/kamil/sfdev/temp"
+ 		let g:apex_temp_folder="/Users/kamil/dev/vim-force.com/temp"
  	endif
  	if !exists("g:apex_properties_folder")
  		" full path required here, relative may not work
- 		let g:apex_properties_folder="/Users/kamil/sfdev/settings"
+ 		let g:apex_properties_folder="/Users/kamil/dev/vim-force.com/settings"
  	endif
  	if !exists("g:apex_workspace_path")
  		" full path required here, relative may not work
- 		let g:apex_workspace_path="/Users/kamil/sfdev/workspaces"
+ 		let g:apex_workspace_path="/users/kamil/dev/vim-force.com/workspaces"
  	endif
     if !exists("g:apex_test_logType")
         let g:apex_test_logType="Debugonly"
@@ -110,3 +110,4 @@ command! W w
 command! Q q
 command! E e
 command! Reload source ~/.vimrc
+command! SF e ~/dev/vim-force.com/workspaces
