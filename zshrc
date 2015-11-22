@@ -33,3 +33,6 @@ setopt interactivecomments
 setopt CORRECT
 
 source $HOME/dotfiles/zsh/aliases
+
+export NVM_DIR="/Users/kamil/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

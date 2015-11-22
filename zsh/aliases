@@ -6,11 +6,13 @@ elif [[ $platform == 'Darwin' ]]; then
     alias l='ls -lrthG'
 fi
 
-alias vs='vim ~/sfdev/workspaces/'
+alias vs='vim ~/dev/vim-force.com/workspaces/'
 alias cd..='cd ..'
 alias rc='. ~/.zshrc'
 alias v='vim'
 alias vi='vim'
 alias gs='git status'
 alias ga='git add'
+alias gd='git diff'
+alias cdev='cd ~/dev'
 # alias irssi='TERM=screen irssi'
