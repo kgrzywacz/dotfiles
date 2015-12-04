@@ -1,0 +1,5 @@
+function cgrep {
+	grep -iR $1 *
+}
+
+

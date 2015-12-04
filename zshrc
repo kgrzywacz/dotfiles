@@ -2,12 +2,11 @@
 export ZSH=/Users/kamil/.oh-my-zsh
 ZSH_THEME="agnoster"
 plugins=(git zsh-syntax-highlighting)
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools"
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
 export TERM="xterm-256color"
-
 # Show contents of directory after cd-ing into it
 chpwd() {
   ls -lrthG
@@ -33,6 +32,9 @@ setopt interactivecomments
 setopt CORRECT
 
 source $HOME/dotfiles/zsh/aliases
+source $HOME/dotfiles/zsh/functions
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
 export NVM_DIR="/Users/kamil/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
