@@ -24,6 +24,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 " set expandtab
+"
+set cursorline
 
 " Sets working direcotry to current file's dir
 set autochdir
@@ -111,3 +113,5 @@ command! Q q
 command! E e
 command! Reload source ~/.vimrc
 command! SF e ~/dev/vim-force.com/workspaces
+
+autocmd Filetype page setlocal ts=2 sw=2 sts=0
