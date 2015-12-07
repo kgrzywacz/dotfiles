@@ -1,4 +1,6 @@
-" VIM SETTINGS BELOW:
+"""""""""""""""""""""""""""""""""""""""""
+"""""""""" VIM SETTINGS BELOW: """""""""" 
+"""""""""""""""""""""""""""""""""""""""""
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -10,7 +12,7 @@ set number
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
-" Allows swtiching from edited buffer without <bang> parameter
+" Allows switching from edited buffer without <bang> parameter
 set hidden
 
 " Switch syntax highlighting on
@@ -23,8 +25,18 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-" set expandtab
-"
+
+" Highlights search matches
+set hlsearch
+
+"Turn off case sensitivity in search:
+set ignorecase
+
+"If there is at least one capital letter in search, then search will be
+"automagically case sensitive:
+set smartcase
+
+" Highlights current line
 set cursorline
 
 " Sets working direcotry to current file's dir
@@ -33,28 +45,30 @@ set autochdir
 " Change <leader> to , char
 let mapleader=","
 
-"Turn off case sensitivity in search:
-set ignorecase
+""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
 
-"If there is at least one capital letter in search, then search will be
-"automagically case sensitive:
-set smartcase
-" VIM PLUGIN SEETINGS BELOW:
+"""""PATHOGEN:
 
-" Pathogen initialisation:
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
-" CtrlP settings:
+let html_wrong_comments=1
+
+"""""CTRLP:
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-" Solarized Theme plugin settings:
+"""""SOLARAIZED:
+
 set background=dark
 " set background=light
 colorscheme solarized
 
-" vim-force.com plugin settings:
+"""""VIM_FORCE:
+
 if has("unix")
     let g:apex_tooling_force_dot_com_path = "/Users/kamil/jars/tooling-force.com.jar"
     if !exists("g:apex_backup_folder")
@@ -77,13 +91,16 @@ if has("unix")
     endif
 endif	
 
-" vim-airline plugin settings:
+autocmd Filetype page setlocal ts=2 sw=2 sts=0
+
+"""""VIM_AIRLINE:
+
 set laststatus=2
 set timeout timeoutlen=1500
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" Ultisnips plugin settings: 
+"""""ULTISNIPS:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
@@ -92,7 +109,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit = "vertical"
 
-" CUSTOM MAPPINGS:
+""""""""""""""""""""""""""""""""""""""
+"""""""""" CUSTOM MAPPINGS: """"""""""
+""""""""""""""""""""""""""""""""""""""
+
 :nmap <leader>qs :w<CR>:ApexSaveOne<CR>y<CR>
 :nmap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
 :nmap <leader>st :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.trigger <CR>:cwin<CR>
@@ -107,11 +127,11 @@ let g:UltiSnipsEditSplit = "vertical"
 :nmap <leader>. :bn<CR>
 :inoremap jj <esc>
 
-" CUSTOM COMMANDS:
+""""""""""""""""""""""""""""""""""""""
+"""""""""" CUSTOM COMMANDS: """"""""""
+""""""""""""""""""""""""""""""""""""""
+
 command! W w
 command! Q q
-command! E e
 command! Reload source ~/.vimrc
 command! SF e ~/dev/vim-force.com/workspaces
-
-autocmd Filetype page setlocal ts=2 sw=2 sts=0
