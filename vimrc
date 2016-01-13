@@ -109,6 +109,9 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit = "vertical"
 
+"""""VIM_NOTES:
+let g:notes_directories = ['~/Documents/Notes']
+
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
@@ -132,6 +135,7 @@ let g:UltiSnipsEditSplit = "vertical"
 """"""""""""""""""""""""""""""""""""""
 
 command! W w
+command! Wq wq
 command! Q q
 command! Reload source ~/.vimrc
 command! SF e ~/dev/vim-force.com/workspaces
