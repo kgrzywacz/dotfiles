@@ -1,8 +1,15 @@
 # oh-my-zsh stuff
 export ZSH=/Users/kamil/.oh-my-zsh
-ZSH_THEME="agnoster"
-plugins=(git zsh-syntax-highlighting)
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools"
+
+ZSH_THEME="apple"
+
+plugins=(git brew zsh zsh-syntax-highlighting)
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools
+
+
+source $HOME/dotfiles/zsh/aliases
+source $HOME/dotfiles/zsh/functions
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
@@ -31,10 +38,8 @@ setopt interactivecomments
 # Zsh has a spelling corrector
 setopt CORRECT
 
-source $HOME/dotfiles/zsh/aliases
-source $HOME/dotfiles/zsh/functions
-
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export NVM_DIR="/Users/kamil/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+auto_set_profile_based_on_time
