@@ -45,6 +45,9 @@ set autochdir
 " Change <leader> to , char
 let mapleader=","
 
+set splitbelow
+set splitright
+
 """"""""""""""""""""""""""""""""""""""""""""""""
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -60,11 +63,21 @@ let html_wrong_comments=1
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+\ 'file': '\-meta\.xml$',
+\ }
 
 """""SOLARAIZED:
+let g:start_hour = system("date +\"%H\"")
 
-set background=dark
-" set background=light
+	set background=dark
+if g:start_hour > 20 || g:start_hour < 8
+	set background=dark
+else 
+	set background=light
+endif
 colorscheme solarized
 
 """""VIM_FORCE:
@@ -98,7 +111,7 @@ autocmd Filetype page setlocal ts=2 sw=2 sts=0
 set laststatus=2
 set timeout timeoutlen=1500
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 """""ULTISNIPS:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -111,6 +124,10 @@ let g:UltiSnipsEditSplit = "vertical"
 
 """""VIM_NOTES:
 let g:notes_directories = ['~/Documents/Notes']
+
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=254
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
@@ -128,7 +145,14 @@ let g:notes_directories = ['~/Documents/Notes']
 :nmap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
 :nmap <leader>, :bp<CR>
 :nmap <leader>. :bn<CR>
+:nmap <leader>lo :call SwitchColorScheme()<CR>
 :inoremap jj <esc>
+
+:nnoremap <C-J> <C-W><C-J>
+:nnoremap <C-K> <C-W><C-K>
+:nnoremap <C-L> <C-W><C-L>
+:nnoremap <C-H> <C-W><C-H>
+:nnoremap <C-b> :CtrlPBuffer<CR>
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM COMMANDS: """"""""""
@@ -139,3 +163,12 @@ command! Wq wq
 command! Q q
 command! Reload source ~/.vimrc
 command! SF e ~/dev/vim-force.com/workspaces
+
+
+function! SwitchColorScheme() 
+	if &background == "light"
+		set background=dark
+	else
+		set background=light
+	endif
+endfunction
