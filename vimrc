@@ -133,37 +133,44 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
 
-:nmap <leader>qs :w<CR>:ApexSaveOne<CR>y<CR>
-:nmap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
-:nmap <leader>st :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.trigger <CR>:cwin<CR>
-:nmap <leader>sp :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.page <CR>:cwin<CR>
-:nmap <leader>ss :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.scf <CR>:cwin<CR>
-:nmap <leader>sa :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger ../**/*.page ../**/*.scf <CR>:cwin<CR>
-:nmap <leader>ob :FufBuffer<CR>
-:nmap <leader>uf :Unite -toggle -start-insert file_rec<CR>
-:nmap <leader>ub :Unite -toggle -start-insert buffer<CR>
-:nmap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
-:nmap <leader>, :bp<CR>
-:nmap <leader>. :bn<CR>
-:nmap <leader>lo :call SwitchColorScheme()<CR>
-:inoremap jj <esc>
+:nnoremap <leader>qs :w<CR>:ApexSaveOne<CR>y<CR>
+:nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
+:nnoremap <leader>st :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.trigger <CR>:cwin<CR>
+:nnoremap <leader>sp :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.page <CR>:cwin<CR>
+:nnoremap <leader>ss :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.scf <CR>:cwin<CR>
+" :nnoremap <leader>sa :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger ../**/*.page ../**/*.scf <CR>:cwin<CR>
+:nnoremap <leader>sa :noautocmd grep /\<<C-R><C-W>\>/j ../**/* <CR>:cwin<CR>
+:nnoremap <leader>ob :FufBuffer<CR>
+:nnoremap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
+:nnoremap <leader>, :bp<CR>
+:nnoremap <leader>. :bn<CR>
+:nnoremap <leader>lo :call SwitchColorScheme()<CR>
+:inoremap jk <esc>
+:inoremap <esc> <nop>
 
 :nnoremap <C-J> <C-W><C-J>
 :nnoremap <C-K> <C-W><C-K>
 :nnoremap <C-L> <C-W><C-L>
 :nnoremap <C-H> <C-W><C-H>
 :nnoremap <C-b> :CtrlPBuffer<CR>
+:nnoremap <leader>ev :split $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+:nnoremap <leader>sf :e ~/dev/vim-force.com/workspaces<cr>
+:nnoremap H 0
+:vnoremap H 0
+:onoremap H 0
+:nnoremap L $
+:vnoremap L $
+:onoremap L $
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM COMMANDS: """"""""""
 """"""""""""""""""""""""""""""""""""""
 
-command! W w
-command! Wq wq
-command! Q q
-command! Reload source ~/.vimrc
-command! SF e ~/dev/vim-force.com/workspaces
-
+cabbrev W w
+cabbrev WQ wq
+cabbrev Wq wq
+cabbrev Q q
 
 function! SwitchColorScheme() 
 	if &background == "light"
