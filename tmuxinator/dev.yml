@@ -1,0 +1,14 @@
+# ~/.tmuxinator/dev.yml
+
+name: dev
+root: ~/dev/vim-workspace
+
+windows:
+  - editor:
+      layout: dc1b,318x88,0,0[318x64,0,0,0,318x23,0,65{105x23,0,65,3,105x23,106,65,4,106x23,212,65,5}]
+      panes:
+        - vim ~/dev/vim-workspace
+        - # empty
+        - irssi
+        - # empty
+  - console: # empty
