@@ -39,3 +39,6 @@ Thumbs.db
 # VIM swap files #
 ##################
 *.sw?
+
+# SF Metadata xml files #
+*-meta.xml
