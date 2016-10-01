@@ -3,9 +3,9 @@ export ZSH=/Users/kamil/.oh-my-zsh
 
 ZSH_THEME="apple"
 
-plugins=(git brew zsh zsh-syntax-highlighting)
+plugins=(git brew zsh zsh-syntax-highlighting osx npm tmuxinator)
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools:/Users/kamil/dev/tools
 
 
 source $HOME/dotfiles/zsh/aliases
@@ -13,7 +13,7 @@ source $HOME/dotfiles/zsh/functions
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
-export TERM="xterm-256color"
+export TERM="screen-256color"
 # Show contents of directory after cd-ing into it
 chpwd() {
   ls -lrthG
@@ -42,4 +42,4 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export NVM_DIR="/Users/kamil/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-auto_set_profile_based_on_time
+#auto_set_profile_based_on_time
