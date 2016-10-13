@@ -193,6 +193,12 @@ cabbrev WQ wq
 cabbrev Wq wq
 cabbrev Q q
 cabbrev E e
+command! -nargs=1 ApexSearch call ApexSearch(<f-args>)
+
+function! ApexSearch (findme)
+	exec 'vim /'.a:findme.'/gj `find .. -type f ! -name "*.resource" ! -name "*.sw*" ! -name ".git"`'
+	cwin
+endfunction
 
 function! SwitchBackground()
 	let &background = (&background == "light" ? "dark" : "light")
