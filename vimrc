@@ -74,14 +74,8 @@ let g:ctrlp_custom_ignore = {
 			\ }
 
 """""SOLARAIZED:
-let g:start_hour = system("date +\"%H\"")
 
 set background=dark
-if g:start_hour > 20 || g:start_hour < 8
-	set background=dark
-else 
-	set background=light
-endif
 colorscheme solarized
 
 """""VIM_FORCE:
@@ -97,11 +91,11 @@ if has("unix")
 	endif
 	if !exists("g:apex_properties_folder")
 		" full path required here, relative may not work
-		let g:apex_properties_folder="/Users/kamil/dev/vim-force.com/settings"
+		let g:apex_properties_folder="/Users/kamil/dev/projects/salesforce/.settings"
 	endif
 	if !exists("g:apex_workspace_path")
 		" full path required here, relative may not work
-		let g:apex_workspace_path="/users/kamil/dev/vim-workspace"
+		let g:apex_workspace_path="/Users/kamil/dev/projects/salesforce"
 	endif
 	if !exists("g:apex_test_logType")
 		let g:apex_test_logType="Debugonly"
@@ -110,7 +104,7 @@ endif
 
 autocmd Filetype page setlocal ts=2 sw=2 sts=0
 let g:apex_server=1 " start server on first call
-let g:apex_server_timeoutSec=60*30 " allow server to wait for new connections within 30 minutes
+let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections within 30 minutes
 
 """""VIM_AIRLINE:
 
@@ -155,7 +149,7 @@ let g:NERDTreeShowBookmarks = 1
 :nnoremap <leader>, :bp<CR>
 :nnoremap <leader>. :bn<CR>
 :nnoremap <leader>sa :ApexStageAdd<CR>
-:nnoremap <leader>tg :call SwitchBackground()<CR>
+:nnoremap <leader>as :ApexSearch <C-R>=expand("<cword>")<CR><CR>
 :inoremap jk <esc>
 
 :nnoremap <C-J> <C-W><C-J>
@@ -193,13 +187,18 @@ cabbrev WQ wq
 cabbrev Wq wq
 cabbrev Q q
 cabbrev E e
-command! -nargs=1 ApexSearch call ApexSearch(<f-args>)
-
-function! ApexSearch (findme)
-	exec 'vim /'.a:findme.'/gj `find .. -type f ! -name "*.resource" ! -name "*.sw*" ! -name ".git"`'
-	cwin
-endfunction
+command! -nargs=+ ApexSearch exec 'silent grep! -iIRF --exclude=\*{-meta.xml,package.xml} --exclude-dir={.git,.vim-force.com} <args> ../..' | copen | execute 'silent /<args>' | redraw!
+command! SwitchBG call SwitchBackground()
 
 function! SwitchBackground()
 	let &background = (&background == "light" ? "dark" : "light")
+endfunction
+
+function! TransformCSLog()
+	exec "%g!/FullName\\/Id/d"
+	exec "%g/.*\\..*__.*/d"
+	exec "%s/FullName\\/Id: /<members>/g"
+	exec "%s/\\/.*/<\\/members>/g"
+	exec "%sort u"
+	exec "noh"
 endfunction
