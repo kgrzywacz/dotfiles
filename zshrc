@@ -5,8 +5,9 @@ ZSH_THEME="apple"
 
 plugins=(git brew zsh zsh-syntax-highlighting osx npm tmuxinator)
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools:/Users/kamil/dev/tools
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools:/Users/kamil/dev/tools:/Applications/Arduino.app/Contents/MacOS/
 
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
