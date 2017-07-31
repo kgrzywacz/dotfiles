@@ -33,6 +33,10 @@ set hlsearch
 
 "Turn off case sensitivity in search:
 set ignorecase
+set relativenumber
+set gdefault
+set wildmenu
+set wildmode=full
 
 "If there is at least one capital letter in search, then search will be
 "automagically case sensitive:
@@ -75,7 +79,7 @@ let g:ctrlp_custom_ignore = {
 
 """""SOLARAIZED:
 
-set background=dark
+set background=light
 colorscheme solarized
 
 """""VIM_FORCE:
@@ -103,6 +107,7 @@ if has("unix")
 endif	
 
 autocmd Filetype page setlocal ts=2 sw=2 sts=0
+autocmd VimResized * wincmd =
 let g:apex_server=1 " start server on first call
 let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections within 30 minutes
 
@@ -177,6 +182,9 @@ let g:NERDTreeShowBookmarks = 1
 :nnoremap <right> <nop>
 :nnoremap <down> <nop>
 :nnoremap Q <nop>
+xnoremap . :norm.<CR>
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 :map <space> <leader>
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM COMMANDS: """"""""""
