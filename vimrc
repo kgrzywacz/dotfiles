@@ -17,6 +17,7 @@ set hidden
 
 " Switch syntax highlighting on
 syntax on
+syntax enable
 
 " Enable file type detection and do language-dependent indenting
 filetype plugin indent on
@@ -54,7 +55,7 @@ set autochdir
 set splitbelow
 set splitright
 
-set dir=/Users/kamil/dev/swap-files/
+set dir=/Users/kamil/dev/vim-swap/
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
@@ -79,13 +80,13 @@ let g:ctrlp_custom_ignore = {
 
 """""SOLARAIZED:
 
-set background=light
+set background=dark
 colorscheme solarized
 
 """""VIM_FORCE:
 
 if has("unix")
-	let g:apex_tooling_force_dot_com_path = "/Users/kamil/jars/tooling-force.com.jar"
+	let g:apex_tooling_force_dot_com_path = "/Users/kamil/dev/jars/tooling-force.com.jar"
 	if !exists("g:apex_backup_folder")
 		let g:apex_backup_folder = "/Users/kamil/dev/vim-force.com/backup"
 	endif

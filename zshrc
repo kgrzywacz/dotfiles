@@ -7,7 +7,7 @@ plugins=(git brew zsh zsh-syntax-highlighting osx npm tmuxinator)
 
 export PATH=/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools:/Users/kamil/dev/tools:/Applications/Arduino.app/Contents/MacOS/
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($fpath)
 
 source $HOME/dotfiles/zsh/aliases
 source $HOME/dotfiles/zsh/functions
@@ -26,8 +26,8 @@ HISTFILE=~/.zsh_history
 SAVEHIST=20000
 
 # Enable completion
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 
 # if you do a 'rm *', Zsh will give you a sanity check!
 setopt RM_STAR_WAIT

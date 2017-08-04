@@ -34,7 +34,7 @@ function auto_set_profile_based_on_time () {
 function antify {
 	if [[ $# > 0 ]]; then
 		ln -s ~/dev/projects/salesforce/.settings/$1.properties ~/dev/projects/salesforce/$1/build.properties
-		ln -s ~/dev/projects/on-ant/build.xml ~/dev/projects/salesforce/$1/build.xml
+		ln -s ~/dev/projects/ant/sf-ant/build.xml ~/dev/projects/salesforce/$1/build.xml
 	else
 		echo You need to provide which project you would like to antify.
 	fi
