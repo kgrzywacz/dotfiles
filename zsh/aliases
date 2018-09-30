@@ -6,7 +6,7 @@ elif [[ $platform == 'Darwin' ]]; then
     alias l='ls -lrthG'
 fi
 
-alias vs='vim ~/dev/vim-workspace/'
+alias vs='vim ~/dev/salesforce/'
 alias cd..='cd ..'
 alias rc='. ~/.zshrc'
 alias v='vim'
@@ -18,7 +18,7 @@ alias ga='git add'
 alias gd='git diff'
 alias cdev='cd ~/dev'
 alias note='vim ~/Documents/Notes'
-alias cdw='cd ~/dev/vim-force.com/workspaces/'
 alias tma='tmux attach -t'
 alias tn='tmux new -s'
 alias irssi='TERM=screen-256color irssi'
+alias ctags="`brew --prefix`/bin/ctags"
