@@ -56,6 +56,7 @@ set splitbelow
 set splitright
 
 set dir=/Users/kamil/dev/vim-swap/
+set clipboard=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
@@ -80,13 +81,16 @@ let g:ctrlp_custom_ignore = {
 
 """""SOLARAIZED:
 
-set background=dark
-colorscheme solarized
+
+ set background=dark
+
+ colorscheme solarized
 
 """""VIM_FORCE:
 
 if has("unix")
-	let g:apex_tooling_force_dot_com_path = "/Users/kamil/dev/jars/tooling-force.com.jar"
+	let g:apex_tooling_force_dot_com_path = "/Users/kamil/dev/libs/tooling-force.com.jar"
+	let g:apex_API_version = "43.0"
 	if !exists("g:apex_backup_folder")
 		let g:apex_backup_folder = "/Users/kamil/dev/vim-force.com/backup"
 	endif
@@ -96,15 +100,16 @@ if has("unix")
 	endif
 	if !exists("g:apex_properties_folder")
 		" full path required here, relative may not work
-		let g:apex_properties_folder="/Users/kamil/dev/projects/salesforce/.settings"
+		let g:apex_properties_folder="/Users/kamil/dev/salesforce/.settings"
 	endif
 	if !exists("g:apex_workspace_path")
 		" full path required here, relative may not work
-		let g:apex_workspace_path="/Users/kamil/dev/projects/salesforce"
+		let g:apex_workspace_path="/Users/kamil/dev/salesforce"
 	endif
 	if !exists("g:apex_test_logType")
 		let g:apex_test_logType="Debugonly"
 	endif
+	let g:apex_ctags_cmd="/usr/local/bin/ctags"
 endif	
 
 autocmd Filetype page setlocal ts=2 sw=2 sts=0
@@ -115,12 +120,15 @@ let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections wi
 """""VIM_AIRLINE:
 
 set laststatus=2
-set timeout timeoutlen=1500
+set statusline=%F%m%r%h%w\ %{FugitiveStatusline()}%=FT=%Y\ \|\ ASCII=\%03.3b\ \|\ POS=%l/%L(%p%%)
+set timeout timeoutlen=15000
 let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
 
 """""ULTISNIPS:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
@@ -137,12 +145,15 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
 
 """""NERDtree
 let g:NERDTreeShowBookmarks = 1
+let NERDTreeShowLineNumbers = 1
+
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
-
-:nnoremap <leader>qs :w<CR>:ApexSaveOne<CR>y<CR>
+:nnoremap <leader>n :e.<CR>
+:nnoremap <leader>aso :w<CR>:ApexSaveOne!<CR>y<CR>
+:nnoremap <leader>asd :wa<CR>:ApexDeployStaged!<CR>y<CR>
 :nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
 :nnoremap <leader>sal :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/* <CR>:cwin<CR>
 :nnoremap <leader>st :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.trigger <CR>:cwin<CR>
@@ -165,9 +176,8 @@ let g:NERDTreeShowBookmarks = 1
 :nnoremap <C-b> :CtrlPBuffer<CR>
 :nnoremap <leader>ev :split $MYVIMRC<CR>
 :nnoremap <leader>sv :source $MYVIMRC<CR>
-:nnoremap <leader>sf :NERDTreeFromBookmark vim-workspace<CR>
 :nnoremap <leader>s :let @a=@+ \| :let @+=@" \| :let @"=@a<CR>
-:nnoremap <leader>n :NERDTree<CR>
+:nnoremap <leader>w :w<CR>
 :nnoremap H 0
 :vnoremap H 0
 :onoremap H 0
