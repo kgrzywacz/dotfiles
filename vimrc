@@ -1,3 +1,4 @@
+"
 """""""""""""""""""""""""""""""""""""""""
 """""""""" VIM SETTINGS BELOW: """""""""" 
 """""""""""""""""""""""""""""""""""""""""
@@ -5,7 +6,19 @@
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kgrzywacz/vim-force.com'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'sirver/UltiSnips'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'kien/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
+call vundle#end()
 " Adds line numbers "
 set number
 
@@ -62,13 +75,6 @@ set clipboard=unnamed
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-"""""PATHOGEN:
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
-let html_wrong_comments=1
-
 """""CTRLP:
 
 let g:ctrlp_map = '<c-p>'
@@ -81,10 +87,8 @@ let g:ctrlp_custom_ignore = {
 
 """""SOLARAIZED:
 
-
- set background=dark
-
- colorscheme solarized
+set background=dark
+colorscheme solarized
 
 """""VIM_FORCE:
 
