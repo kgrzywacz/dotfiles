@@ -1,0 +1,42 @@
+snippet rts "RecordTypeService snippet" i
+RecordTypeService.getRecordTypeIdByDeveloperName('$1', '$2')
+endsnippet
+
+snippet rt "" i
+RecordTypeId
+endsnippet
+
+snippet so "" i
+PBSI__PBSI_Sales_Order__c
+endsnippet
+
+snippet sin "" i
+c2g__codaInvoice__c
+endsnippet
+
+snippet sol "" i
+PBSI__PBSI_Sales_Order_Line__c
+endsnippet
+
+snippet psol "" i
+PBSI__Shipped_Sales_Order_Line__c
+endsnippet
+
+snippet mo "" i
+Master_Order__c
+endsnippet
+
+snippet log "" i
+LogService log = LogService.getLogService();
+log.addError().type($1).relatedObjId($2).info($3);
+log.save();
+endsnippet
+
+snippet tdf "" i
+TestDataFactory tdf = TestDataFactory.instance;
+endsnippet
+
+snippet deb "" i
+System.debug($1);
+endsnippet
+
