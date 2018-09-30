@@ -39,3 +39,6 @@ Thumbs.db
 # VIM swap files #
 ##################
 *.sw?
+
+#Vim force.com plugin scratch file
+vim-force.com-scratch.txt
