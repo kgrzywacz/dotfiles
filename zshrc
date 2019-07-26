@@ -21,8 +21,8 @@ export LC_ALL=en_US.UTF-8
 
 fpath=($fpath)
 
-source $HOME/dotfiles/zsh/aliases
-source $HOME/dotfiles/zsh/functions
+source $HOME/dotfiles/zsh/aliases.zsh
+source $HOME/dotfiles/zsh/functions.zsh
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
