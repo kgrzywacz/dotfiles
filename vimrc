@@ -13,9 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'kgrzywacz/vim-force.com'
-Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'sirver/UltiSnips'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
@@ -167,12 +165,6 @@ let g:notes_directories = ['~/Documents/Notes']
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=254
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
-
-"""""NERDtree
-let g:NERDTreeShowBookmarks = 1
-let NERDTreeShowLineNumbers = 1
-"let g:NERDTreeDirArrows=0
-
 
 let g:ale_linter_aliases = {'apexcode': 'java'}
 
