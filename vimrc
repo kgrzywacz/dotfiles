@@ -11,17 +11,24 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'itchyny/lightline.vim'
 Plugin 'kgrzywacz/vim-force.com'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'sirver/UltiSnips'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'NikolayFrantsev/jshint2.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()
 " Adds line numbers "
 set number
 
+set encoding=utf-8
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -87,14 +94,21 @@ let g:ctrlp_custom_ignore = {
 
 """""SOLARAIZED:
 
-set background=dark
 colorscheme solarized
+let itermProfile = $ITERM_PROFILE
+if itermProfile ==  'light'
+	set background=light
+else
+	set background=dark
+endif
+
 
 """""VIM_FORCE:
 
 if has("unix")
 	let g:apex_tooling_force_dot_com_path = "/Users/kamil/dev/libs/tooling-force.com.jar"
-	let g:apex_API_version = "43.0"
+	let g:apex_conflict_check = 0
+	let g:apex_API_version = "44.0"
 	if !exists("g:apex_backup_folder")
 		let g:apex_backup_folder = "/Users/kamil/dev/vim-force.com/backup"
 	endif
@@ -121,13 +135,20 @@ autocmd VimResized * wincmd =
 let g:apex_server=1 " start server on first call
 let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections within 30 minutes
 
-"""""VIM_AIRLINE:
+"""""lightline:
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 set laststatus=2
-set statusline=%F%m%r%h%w\ %{FugitiveStatusline()}%=FT=%Y\ \|\ ASCII=\%03.3b\ \|\ POS=%l/%L(%p%%)
 set timeout timeoutlen=15000
-let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
 
 """""ULTISNIPS:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -150,12 +171,16 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
 """""NERDtree
 let g:NERDTreeShowBookmarks = 1
 let NERDTreeShowLineNumbers = 1
+"let g:NERDTreeDirArrows=0
 
+
+let g:ale_linter_aliases = {'apexcode': 'java'}
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
-:nnoremap <leader>n :e.<CR>
+":nnoremap <leader>n :e.<CR>
+:nnoremap <leader>n :NERDTreeFocus<CR>
 :nnoremap <leader>aso :w<CR>:ApexSaveOne!<CR>y<CR>
 :nnoremap <leader>asd :wa<CR>:ApexDeployStaged!<CR>y<CR>
 :nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
@@ -177,7 +202,7 @@ let NERDTreeShowLineNumbers = 1
 :nnoremap <C-K> <C-W><C-K>
 :nnoremap <C-L> <C-W><C-L>
 :nnoremap <C-H> <C-W><C-H>
-:nnoremap <C-b> :CtrlPBuffer<CR>
+:nnoremap <C-b> :Buffers<CR>
 :nnoremap <leader>ev :split $MYVIMRC<CR>
 :nnoremap <leader>sv :source $MYVIMRC<CR>
 :nnoremap <leader>s :let @a=@+ \| :let @+=@" \| :let @"=@a<CR>
@@ -210,8 +235,10 @@ cabbrev WQ wq
 cabbrev Wq wq
 cabbrev Q q
 cabbrev E e
+cabbrev Ads ApexDeployStaged!
 command! -nargs=+ ApexSearch exec 'silent grep! -iIRF --exclude=\*{-meta.xml,package.xml} --exclude-dir={.git,.vim-force.com} <args> ../..' | copen | execute 'silent /<args>' | redraw!
 command! SwitchBG call SwitchBackground()
+command! FormatJSON call FormatJSON()
 
 function! SwitchBackground()
 	let &background = (&background == "light" ? "dark" : "light")
@@ -225,3 +252,9 @@ function! TransformCSLog()
 	exec "%sort u"
 	exec "noh"
 endfunction
+
+function! FormatJSON()
+	:%!python -m json.tool
+endfunction
+
+autocmd FileType apexcode nnoremap <buffer> <C-]> :call apexComplete#goToSymbol()<Enter>

@@ -13,7 +13,7 @@ function gcsf() {
 	propfile=$BUILD_PROP_DIR/${dir##*\/}.properties
 	if [[ -f "$propfile" ]]; then
 		print $propfile already exists, do you want to overwrite it\?
-		read overwrite
+			read overwrite
 	fi;
 	if [[ overwrite = "yes" || overwrite = "y" || ! -f "$propfile"  ]]; then
 		rm $propfile > /dev/null
@@ -31,14 +31,14 @@ function gcsf() {
 			echo sf.serverurl = https://login.salesforce.com | tee -a $propfile > /dev/null
 		else
 			echo sf.serverurl = https://test.salesforce.com | tee -a $propfile > /dev/null
-				fi;
+		fi;
 	fi;
 	git clone https://github.com/onrunning/on-sf.git $srcdir
 	ln -s $BUILD_PROP_DIR/${dir##*\/}.properties $srcdir/build.properties
 	ln -s $BUILD_XML $srcdir/build.xml
 }
 
-function g {
+function g() {
 	if [[ $# > 0 ]]; then
 		git $@;
 	else
@@ -46,7 +46,7 @@ function g {
 	fi;
 }
 
-function focus {
+function focus() {
 	if [[ $# > 0 ]]; then
 		open "focus://focus?minutes=$1";
 	else
@@ -70,4 +70,27 @@ function antify {
 	else
 		echo You need to provide which project you would like to antify.
 	fi
+}
+
+function apexSwitchProject {
+	local CURRENT_PROJECT="current"
+	if [[ $1 = $CURRENT_PROJECT ]] then
+		echo You can\'t switch to current project
+	elif [[ -n $1 && -e ~/dev/salesforce/.settings/$1.properties ]]; then
+		cp -f ~/dev/salesforce/.settings/$1.properties ~/dev/salesforce/.settings/current.properties
+	elsE
+		echo Provide valid project name.
+	fi
+}
+
+fbr() {
+	git fetch
+	local branches branch
+	branches=$(git branch -a) &&
+		branch=$(echo "$branches" | fzf +s +m -e) &&
+	git checkout $(echo "$branch" | sed "s:.* remotes/origin/::" | sed "s:.* ::")
+}
+
+function f() {
+	vim $(fzf)
 }

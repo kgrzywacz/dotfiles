@@ -3,12 +3,21 @@ export ZSH=/Users/kamil/.oh-my-zsh
 
 ZSH_THEME="apple"
 
-plugins=(git brew zsh zsh-syntax-highlighting osx npm tmuxinator zsh-completions)
+plugins=(
+	git
+	brew
+	osx
+	npm
+	fzf
+	gitfast
+)
 
-export PATH=/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/Library/Android/sdk/platform-tools:/Users/kamil/dev/libs:/Applications/Arduino.app/Contents/MacOS/
+export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs
 
 export BUILD_XML=~/dev/projects/ant/sf-ant/build.xml
 export BUILD_PROP_DIR=~/dev/projects/salesforce/.settings
+export ANT_SF_HOME=/Users/kamil/dev/libs/ant-salesforce.jar
+export LC_ALL=en_US.UTF-8
 
 fpath=($fpath)
 
@@ -51,3 +60,10 @@ export NVM_DIR="/Users/kamil/.nvm"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# More verbose completition functions
+zstyle ‘:completion:*’ verbose yes
+zstyle ‘:completion:*:descriptions’ format ‘%B%d%b’
+zstyle ‘:completion:*:messages’ format ‘%d’
+zstyle ‘:completion:*:warnings’ format ‘No matches for: %d’
+zstyle ‘:completion:*’ group-name ”
