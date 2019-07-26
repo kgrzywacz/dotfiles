@@ -40,3 +40,54 @@ snippet deb "" i
 System.debug($1);
 endsnippet
 
+snippet sot "" i
+SObjectType
+endsnippet
+
+snippet sof "" i
+SObjectField
+endsnippet
+
+snippet dum "" i
+XFTY_DummySObjectSupplier($1)
+endsnippet
+
+snippet dummysupplier
+private static final ${1} ${2}
+	= ($1) new XFTY_DummySObjectSupplier($1.SObjectType)
+	.setInsertMode(XFTY_InsertModeEnum.${3})
+	.supply${4}();
+endsnippet
+
+snippet testmethod
+@IsTest
+public static void test$1() {
+	//Arrange
+
+	//Act
+	System.runAs(TEST_USER$2) {
+		Test.startTest();
+		Test.stopTest();
+	}
+
+	//Assert
+}
+endsnippet
+
+snippet testuser
+private static final User TEST_USER = TEST_DummyUserFactoryOutlet.TEST_ADMIN_USER;
+endsnippet
+
+snippet singleton
+private static $1 instance;
+
+private $1() {
+}
+
+public static $1 getInstance() {
+	if (instance == null) {
+		instance = new $1();
+	}
+	return instance;
+}
+endsnippet
