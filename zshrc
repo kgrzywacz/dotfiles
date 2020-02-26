@@ -1,7 +1,7 @@
 # oh-my-zsh stuff
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="apple"
+ZSH_THEME="simple"
 
 plugins=(
 	git
@@ -62,10 +62,3 @@ export NVM_DIR="/Users/kamil/.nvm"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# More verbose completition functions
-zstyle ‘:completion:*’ verbose yes
-zstyle ‘:completion:*:descriptions’ format ‘%B%d%b’
-zstyle ‘:completion:*:messages’ format ‘%d’
-zstyle ‘:completion:*:warnings’ format ‘No matches for: %d’
-zstyle ‘:completion:*’ group-name ”
