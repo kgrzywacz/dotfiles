@@ -1,5 +1,5 @@
 # oh-my-zsh stuff
-export ZSH=/Users/kamil/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="apple"
 
@@ -10,6 +10,7 @@ plugins=(
 	npm
 	fzf
 	gitfast
+	mix
 )
 
 export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs
@@ -23,6 +24,7 @@ fpath=($fpath)
 
 source $HOME/dotfiles/zsh/aliases.zsh
 source $HOME/dotfiles/zsh/functions.zsh
+source $HOME/dotfiles/zsh/fzf_config.zsh
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...

@@ -94,3 +94,48 @@ fbr() {
 function f() {
 	vim $(fzf)
 }
+
+function feature_branch() {
+	git co -b feature/ONDEV-$1/$(echo $2 | tr " " "_")
+}
+
+function formatit() {
+	astyle --mode=java -A2 -xc -xU -p -xg -U -xb -j < $1 > $1-formatted
+}
+
+function is_dark_mode_on() {
+	local is_dark_mode_on
+	is_dark_mode_on=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+	if [[ "$is_dark_mode_on" == "Dark" ]]; then
+		echo "true"
+	else
+		echo "false"
+	fi
+}
+
+function update_iterm_profile() {
+	local profile_file=~/Library/Application\ Support/iTerm2/DynamicProfiles/dynamic
+	if [[ -f "$profile_file" ]]; then
+		jq .Profiles[0]."\"Dynamic Profile Parent Name\""="\"$(automatic_profile_name)\"" \
+			$profile_file > $profile_file.tmp \
+			&& cp $profile_file.tmp $profile_file \
+			&& rm $profile_file.tmp
+	else
+		create_dynamic_mode_iterm_profile > $profile_file
+	fi
+}
+
+function create_dynamic_mode_iterm_profile() {
+	jq -n \
+	--arg guid $(uuidgen) \
+	--arg parent_name $(automatic_profile_name) \
+	'{"Profiles":[{"Name":"Dynamic mode","Guid":$guid,"Dynamic Profile Parent Name":$parent_name}]}'
+}
+
+function automatic_profile_name() {
+	if [[ $(is_dark_mode_on) == "false" ]]; then
+		echo "solarized-light"
+	else
+		echo "solarized-dark"
+	fi
+}

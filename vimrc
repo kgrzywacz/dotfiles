@@ -1,6 +1,6 @@
 "
 """""""""""""""""""""""""""""""""""""""""
-"""""""""" VIM SETTINGS BELOW: """""""""" 
+"""""""""" VIM SETTINGS BELOW: """"""""""
 """""""""""""""""""""""""""""""""""""""""
 
 " Use Vim settings, rather than Vi settings (much better!).
@@ -10,18 +10,26 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'itchyny/lightline.vim'
-Plugin 'kgrzywacz/vim-force.com'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'sirver/UltiSnips'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kien/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
 Plugin 'NikolayFrantsev/jshint2.vim'
+Plugin 'ayu-theme/ayu-vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'itchyny/lightline.vim'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/vader.vim'
+Plugin 'kgrzywacz/ale'
+Plugin 'kgrzywacz/vim-force.com'
+Plugin 'maximbaz/lightline-ale'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'sirver/UltiSnips'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-vinegar'
+
 call vundle#end()
 " Adds line numbers "
 set number
@@ -52,7 +60,7 @@ set hlsearch
 
 "Turn off case sensitivity in search:
 set ignorecase
-set relativenumber
+"set relativenumber
 set gdefault
 set wildmenu
 set wildmode=full
@@ -80,25 +88,14 @@ set clipboard=unnamed
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-"""""CTRLP:
-
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
-let g:ctrlp_custom_ignore = {
-			\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-			\ 'file': '\-meta\.xml$',
-			\ }
-
 """""SOLARAIZED:
 
-colorscheme solarized
-let itermProfile = $ITERM_PROFILE
-if itermProfile ==  'light'
-	set background=light
-else
-	set background=dark
-endif
+"set termguicolors
+let itemProfile = split($ITERM_PROFILE, "-")
+let colorscheme = itemProfile[0]
+execute 'colorscheme ' . colorscheme
+execute 'silent set background=' . itemProfile[1]
+let ayucolor=itemProfile[1]
 
 
 """""VIM_FORCE:
@@ -126,7 +123,7 @@ if has("unix")
 		let g:apex_test_logType="Debugonly"
 	endif
 	let g:apex_ctags_cmd="/usr/local/bin/ctags"
-endif	
+endif
 
 autocmd Filetype page setlocal ts=2 sw=2 sts=0
 autocmd VimResized * wincmd =
@@ -135,7 +132,7 @@ let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections wi
 
 """""lightline:
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': colorscheme,
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -144,6 +141,22 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 set laststatus=2
 set timeout timeoutlen=15000
@@ -159,20 +172,11 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit = "vertical"
 
-"""""VIM_NOTES:
-let g:notes_directories = ['~/Documents/Notes']
-
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=254
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
-
-let g:ale_linter_aliases = {'apexcode': 'java'}
-
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
 ":nnoremap <leader>n :e.<CR>
-:nnoremap <leader>n :NERDTreeFocus<CR>
+:nnoremap <leader>n :Ex<CR>
 :nnoremap <leader>aso :w<CR>:ApexSaveOne!<CR>y<CR>
 :nnoremap <leader>asd :wa<CR>:ApexDeployStaged!<CR>y<CR>
 :nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
@@ -183,7 +187,7 @@ let g:ale_linter_aliases = {'apexcode': 'java'}
 " :nnoremap <leader>sa :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger ../**/*.page ../**/*.scf <CR>:cwin<CR>
 :nnoremap <leader>sa :noautocmd grep /\<<C-R><C-W>\>/j ../**/* <CR>:cwin<CR>
 :nnoremap <leader>ob :FufBuffer<CR>
-:nnoremap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
+":nnoremap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
 :nnoremap <leader>, :bp<CR>
 :nnoremap <leader>. :bn<CR>
 :nnoremap <leader>sa :ApexStageAdd<CR>
@@ -195,6 +199,7 @@ let g:ale_linter_aliases = {'apexcode': 'java'}
 :nnoremap <C-L> <C-W><C-L>
 :nnoremap <C-H> <C-W><C-H>
 :nnoremap <C-b> :Buffers<CR>
+:nnoremap <C-p> :GFiles<CR>
 :nnoremap <leader>ev :split $MYVIMRC<CR>
 :nnoremap <leader>sv :source $MYVIMRC<CR>
 :nnoremap <leader>s :let @a=@+ \| :let @+=@" \| :let @"=@a<CR>
@@ -229,12 +234,7 @@ cabbrev Q q
 cabbrev E e
 cabbrev Ads ApexDeployStaged!
 command! -nargs=+ ApexSearch exec 'silent grep! -iIRF --exclude=\*{-meta.xml,package.xml} --exclude-dir={.git,.vim-force.com} <args> ../..' | copen | execute 'silent /<args>' | redraw!
-command! SwitchBG call SwitchBackground()
 command! FormatJSON call FormatJSON()
-
-function! SwitchBackground()
-	let &background = (&background == "light" ? "dark" : "light")
-endfunction
 
 function! TransformCSLog()
 	exec "%g!/FullName\\/Id/d"
@@ -250,3 +250,9 @@ function! FormatJSON()
 endfunction
 
 autocmd FileType apexcode nnoremap <buffer> <C-]> :call apexComplete#goToSymbol()<Enter>
+
+let g:netrw_banner=0
+let g:netrw_liststyle=1
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
+autocmd FileType netrw set nolist number
+nnoremap <Leader>x :<C-U>call StripTrailingWhitespace()<CR>
