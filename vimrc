@@ -12,7 +12,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'NikolayFrantsev/jshint2.vim'
-Plugin 'ayu-theme/ayu-vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'elixir-editors/vim-elixir'
@@ -81,7 +80,7 @@ set autochdir
 set splitbelow
 set splitright
 
-set dir=/Users/kamil/dev/vim-swap/
+set dir^=$HOME/.vim/tmp//
 set clipboard=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -89,13 +88,8 @@ set clipboard=unnamed
 """"""""""""""""""""""""""""""""""""""""""""""""
 
 """""SOLARAIZED:
-
-"set termguicolors
-let itemProfile = split($ITERM_PROFILE, "-")
-let colorscheme = itemProfile[0]
-execute 'colorscheme ' . colorscheme
-execute 'silent set background=' . itemProfile[1]
-let ayucolor=itemProfile[1]
+colorscheme solarized
+set background=dark
 
 
 """""VIM_FORCE:
@@ -132,7 +126,7 @@ let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections wi
 
 """""lightline:
 let g:lightline = {
-      \ 'colorscheme': colorscheme,
+      \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
