@@ -2,14 +2,6 @@ function cgrep {
 	grep -iR $1 *
 }
 
-function g() {
-	if [[ $# > 0 ]]; then
-		git $@;
-	else
-		git status;
-	fi;
-}
-
 function antify {
 	if [[ $# > 0 ]]; then
 		ln -s ~/dev//salesforce/.settings/$1.properties ~/dev//salesforce/$1/build.properties

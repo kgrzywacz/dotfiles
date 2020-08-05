@@ -4,8 +4,8 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="simple"
 
 plugins=(
-	git
 	brew
+	docker
 	osx
 	npm
 	fzf
@@ -13,7 +13,7 @@ plugins=(
 	mix
 )
 
-export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs
+export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs:/Users/kamil/.dotnet/tools
 
 export BUILD_XML=~/dev/projects/ant/sf-ant/build.xml
 export BUILD_PROP_DIR=~/dev/projects/salesforce/.settings
@@ -41,6 +41,8 @@ SAVEHIST=20000
 
 # Enable completion
 autoload -U compinit && compinit
+autoload bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
 
 # if you do a 'rm *', Zsh will give you a sanity check!
 setopt RM_STAR_WAIT

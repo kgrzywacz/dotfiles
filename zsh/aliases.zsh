@@ -18,3 +18,7 @@ alias gd='git diff'
 alias cdev='cd ~/dev'
 alias tma='tmux attach -t'
 alias tn='tmux new -s'
+
+xslt() {
+	saxon $1 -s:$2 | xmllint --format - > $3
+}
