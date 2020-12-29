@@ -19,6 +19,7 @@ export BUILD_XML=~/dev/projects/ant/sf-ant/build.xml
 export BUILD_PROP_DIR=~/dev/projects/salesforce/.settings
 export ANT_SF_HOME=/Users/kamil/dev/libs/ant-salesforce.jar
 export LC_ALL=en_US.UTF-8
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 
 fpath=($fpath)
 
