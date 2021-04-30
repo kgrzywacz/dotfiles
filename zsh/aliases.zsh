@@ -18,6 +18,8 @@ alias gd='git diff'
 alias cdev='cd ~/dev'
 alias tma='tmux attach -t'
 alias tn='tmux new -s'
+alias tf='terraform'
+alias tfws='terraform workspace select'
 
 xslt() {
 	saxon $1 -s:$2 | xmllint --format - > $3

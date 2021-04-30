@@ -6,11 +6,13 @@ ZSH_THEME="simple"
 plugins=(
 	brew
 	docker
-	osx
-	npm
 	fzf
+	git-auto-fetch
 	gitfast
 	mix
+	npm
+	nvm
+	osx
 )
 
 export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs:/Users/kamil/.dotnet/tools
