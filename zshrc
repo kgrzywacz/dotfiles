@@ -10,12 +10,13 @@ plugins=(
 	git-auto-fetch
 	gitfast
 	mix
-	npm
 	nvm
-	osx
+	npm
+	macos
+	wd
 )
 
-export PATH=/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs:/Users/kamil/.dotnet/tools
+export PATH=/usr/local/opt/node@14/bin:/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs:/Users/kamil/.dotnet/tools
 
 export BUILD_XML=~/dev/projects/ant/sf-ant/build.xml
 export BUILD_PROP_DIR=~/dev/projects/salesforce/.settings
@@ -28,6 +29,7 @@ fpath=($fpath)
 source $HOME/dotfiles/zsh/aliases.zsh
 source $HOME/dotfiles/zsh/functions.zsh
 source $HOME/dotfiles/zsh/fzf_config.zsh
+source $HOME/dotfiles/zsh/variables.zsh
 source $ZSH/oh-my-zsh.sh
 
 # want your terminal to support 256 color schemes? I do ...
@@ -61,9 +63,8 @@ set -o ignoreeof
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export NVM_DIR="/Users/kamil/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+                
 #auto_set_profile_based_on_time
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH; # sfdx autocomplete setup

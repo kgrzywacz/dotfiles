@@ -1,8 +1,11 @@
-"languageserver": {
-  "terraform": {
-    "command": "terraform-ls",
-    "args": ["serve"],
-    "filetypes": ["terraform", "tf"],
-    "initializationOptions": {}
-  }
+{
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
+    }
+  },
+  "salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
 }

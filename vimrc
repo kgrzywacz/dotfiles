@@ -134,7 +134,6 @@ let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections wi
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
 ":nnoremap <leader>n :e.<CR>
-:nnoremap <leader>n :Ex<CR>
 :nnoremap <leader>aso :w<CR>:ApexSaveOne!<CR>
 :nnoremap <leader>asd :wa<CR>:ApexDeployStaged!<CR>y<CR>
 :nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
@@ -191,9 +190,11 @@ cabbrev Wq wq
 cabbrev Q q
 cabbrev E e
 cabbrev Ads ApexDeployStaged!
+cabbrev WW CocCommand SFDX.Push.Default.Scratch.Org
 command! -nargs=+ ApexSearch exec 'silent grep! -iIRF --exclude=\*{-meta.xml,package.xml} --exclude-dir={.git,.vim-force.com} <args> ../..' | copen | execute 'silent /<args>' | redraw!
 command! FormatJson call FormatJson()
 command! FormatXml call FormatXml()
+"command! Rsave CocCommand SFDX.Push.Default.Scratch.Org
 
 function! TransformCSLog()
 	exec "%g!/FullName\\/Id/d"
@@ -207,9 +208,10 @@ endfunction
 autocmd FileType apexcode nnoremap <buffer> <C-]> :call apexComplete#goToSymbol()<Enter>
 
 let g:netrw_banner=0
-let g:netrw_liststyle=1
+let g:netrw_liststyle=0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist number
 nnoremap <Leader>x :<C-U>call StripTrailingWhitespace()<CR>
 
+let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
 
