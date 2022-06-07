@@ -4,8 +4,9 @@
       "command": "terraform-ls",
       "args": ["serve"],
       "filetypes": ["terraform", "tf"],
-      "initializationOptions": {}
+      "initializationOptions": {},
+	  "settings": {}
     }
   },
-  "salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
+  "salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 }

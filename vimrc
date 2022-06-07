@@ -32,7 +32,7 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'othree/xml.vim'
 Plugin 'neoclide/coc.nvim'
-Plugin 'ayu-theme/ayu-vim'
+Plugin 'arcticicestudio/nord-vim'
 
 call vundle#end()
 " Adds line numbers "
@@ -93,9 +93,13 @@ set clipboard=unnamed
 """""""""" VIM PLUGIN SEETINGS BELOW: """"""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-"""""SOLARAIZED:
-colorscheme ayu
-set background=dark
+"""""THEME:
+if (has("termguicolors"))
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set termguicolors
+endif
+colorscheme nord
 
 """""VIM_FORCE:
 
@@ -214,4 +218,3 @@ autocmd FileType netrw set nolist number
 nnoremap <Leader>x :<C-U>call StripTrailingWhitespace()<CR>
 
 let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
-

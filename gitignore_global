@@ -48,3 +48,5 @@ dev
 
 #Ctags
 tags
+
+.secrets.zsh
