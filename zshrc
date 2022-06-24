@@ -63,3 +63,6 @@ SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup &
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval 
 SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH; # sfdx autocomplete setup
+
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward

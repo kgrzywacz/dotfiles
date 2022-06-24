@@ -218,3 +218,5 @@ autocmd FileType netrw set nolist number
 nnoremap <Leader>x :<C-U>call StripTrailingWhitespace()<CR>
 
 let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
+ 
+let g:terraform_fmt_on_save = 1

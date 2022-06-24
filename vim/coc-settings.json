@@ -1,11 +1,9 @@
 {
   "languageserver": {
     "terraform": {
-      "command": "terraform-ls",
-      "args": ["serve"],
+      "command": "terraform-lsp",
       "filetypes": ["terraform", "tf"],
-      "initializationOptions": {},
-	  "settings": {}
+      "initializationOptions": {}
     }
   },
   "salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
