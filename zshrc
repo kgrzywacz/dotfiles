@@ -66,3 +66,6 @@ SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup &
 
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
