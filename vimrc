@@ -8,35 +8,35 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'NikolayFrantsev/jshint2.vim'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'itchyny/lightline.vim'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/vader.vim'
-Plugin 'kgrzywacz/ale'
-Plugin 'kgrzywacz/vim-force.com'
-Plugin 'maximbaz/lightline-ale'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'sirver/UltiSnips'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-vinegar'
-Plugin 'hashivim/vim-terraform'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
-Plugin 'othree/xml.vim'
-Plugin 'neoclide/coc.nvim'
-Plugin 'arcticicestudio/nord-vim'
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-call vundle#end()
+call plug#begin()
+
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'altercation/vim-colors-solarized'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
+Plug 'hashivim/vim-terraform'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'othree/xml.vim'
+Plug 'neoclide/coc.nvim'
+Plug 'neowit/vim-force.com'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+
+call plug#end()
 " Adds line numbers "
 set number
+
 
 set encoding=utf-8
 " Make backspace behave in a sane manner.
@@ -94,65 +94,21 @@ set clipboard=unnamed
 """"""""""""""""""""""""""""""""""""""""""""""""
 
 """""THEME:
-if (has("termguicolors"))
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	set termguicolors
-endif
-colorscheme nord
-
-"""""VIM_FORCE:
-
-if has("unix")
-	let g:apex_tooling_force_dot_com_path = "/Users/kamil/dev/libs/tooling-force.com.jar"
-	let g:apex_conflict_check = 0
-	let g:apex_API_version = "44.0"
-	if !exists("g:apex_backup_folder")
-		let g:apex_backup_folder = "/Users/kamil/dev/vim-force.com/backup"
-	endif
-	if !exists("g:apex_temp_folder")
-		" full path required here, relative may not work
-		let g:apex_temp_folder="/Users/kamil/dev/vim-force.com/temp"
-	endif
-	if !exists("g:apex_properties_folder")
-		" full path required here, relative may not work
-		let g:apex_properties_folder="/Users/kamil/dev/salesforce/.settings"
-	endif
-	if !exists("g:apex_workspace_path")
-		" full path required here, relative may not work
-		let g:apex_workspace_path="/Users/kamil/dev/salesforce"
-	endif
-	if !exists("g:apex_test_logType")
-		let g:apex_test_logType="Debugonly"
-	endif
-	let g:apex_ctags_cmd="/usr/local/bin/ctags"
-endif
-
-autocmd Filetype page setlocal ts=2 sw=2 sts=0
-autocmd VimResized * wincmd =
-let g:apex_server=1 " start server on first call
-let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections within 30 minutes
+"if (has("termguicolors"))
+	"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"endif
+colorscheme catppuccin_mocha
+set termguicolors
+"set t_Co=16
 
 
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM MAPPINGS: """"""""""
 """"""""""""""""""""""""""""""""""""""
-":nnoremap <leader>n :e.<CR>
-:nnoremap <leader>aso :w<CR>:ApexSaveOne!<CR>
-:nnoremap <leader>asd :wa<CR>:ApexDeployStaged!<CR>y<CR>
-:nnoremap <leader>sc :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger <CR>:cwin<CR>
-:nnoremap <leader>sal :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/* <CR>:cwin<CR>
-:nnoremap <leader>st :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.trigger <CR>:cwin<CR>
-:nnoremap <leader>sp :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.page <CR>:cwin<CR>
-:nnoremap <leader>ss :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.scf <CR>:cwin<CR>
-" :nnoremap <leader>sa :noautocmd vimgrep /\<<C-R><C-W>\>/j ../**/*.cls ../**/*.trigger ../**/*.page ../**/*.scf <CR>:cwin<CR>
-:nnoremap <leader>sa :noautocmd grep /\<<C-R><C-W>\>/j ../**/* <CR>:cwin<CR>
-:nnoremap <leader>ob :FufBuffer<CR>
 ":nnoremap <expr> <leader>p ":CtrlP ". split(expand('%:p'), 'src')[0]. "<CR>"
 :nnoremap <leader>, :bp<CR>
 :nnoremap <leader>. :bn<CR>
-:nnoremap <leader>sa :ApexStageAdd<CR>
-:nnoremap <leader>as :ApexSearch <C-R>=expand("<cword>")<CR><CR>
 :inoremap jk <esc>
 
 :nnoremap <C-J> <C-W><C-J>
@@ -163,8 +119,6 @@ let g:apex_server_timeoutSec=60*60 " allow server to wait for new connections wi
 :nnoremap <C-p> :GFiles<CR>
 :nnoremap <leader>ev :split $MYVIMRC<CR>
 :nnoremap <leader>sv :source $MYVIMRC<CR>
-:nnoremap <leader>s :let @a=@+ \| :let @+=@" \| :let @"=@a<CR>
-:nnoremap <leader>w :w<CR>
 :nnoremap H 0
 :vnoremap H 0
 :onoremap H 0
@@ -184,6 +138,11 @@ xnoremap . :norm.<CR>
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 :map <space> <leader>
+
+
+function! FormatJson()
+	:%!python3 -m json.tool
+endfunction
 """"""""""""""""""""""""""""""""""""""
 """""""""" CUSTOM COMMANDS: """"""""""
 """"""""""""""""""""""""""""""""""""""
@@ -193,23 +152,8 @@ cabbrev WQ wq
 cabbrev Wq wq
 cabbrev Q q
 cabbrev E e
-cabbrev Ads ApexDeployStaged!
-cabbrev WW CocCommand SFDX.Push.Default.Scratch.Org
-command! -nargs=+ ApexSearch exec 'silent grep! -iIRF --exclude=\*{-meta.xml,package.xml} --exclude-dir={.git,.vim-force.com} <args> ../..' | copen | execute 'silent /<args>' | redraw!
 command! FormatJson call FormatJson()
 command! FormatXml call FormatXml()
-"command! Rsave CocCommand SFDX.Push.Default.Scratch.Org
-
-function! TransformCSLog()
-	exec "%g!/FullName\\/Id/d"
-	exec "%g/.*\\..*__.*/d"
-	exec "%s/FullName\\/Id: /<members>/g"
-	exec "%s/\\/.*/<\\/members>/g"
-	exec "%sort u"
-	exec "noh"
-endfunction
-
-autocmd FileType apexcode nnoremap <buffer> <C-]> :call apexComplete#goToSymbol()<Enter>
 
 let g:netrw_banner=0
 let g:netrw_liststyle=0
