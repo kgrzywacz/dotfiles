@@ -72,8 +72,8 @@ function getLocalSettings() {
 
 	for i in "${secretNameArray[@]}";
 	do
-		keyvaultName=$(echo "$i" | awk -F/ '{ print $3 }' | awk -F. '{ print $1}');
-		secretName=$(echo "$i" | awk -F/ '{ print $5 }');
+		keyvaultName=$(echo "$i" | awk -F/ '{ print $3 }' | awk -F. '{ print $1 }');
+		secretName=$(echo "$i" | awk -F/ '{ print $5 }' | awk -F\) '{ print $1 }');
 		newSecret=$(az keyvault secret show --vault-name "$keyvaultName" -n "$secretName" | jq '.value' -r);
 		cp local.settings.json local.settings.json.temp;
 		jq --arg oldVal "$i" --arg newVal "$newSecret" '.Values[] |= if . == $oldVal then .=$newVal else . end' local.settings.json.temp > local.settings.json;
