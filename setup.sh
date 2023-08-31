@@ -4,7 +4,7 @@
 
 dir=~/dotfiles
 backup=~/dotfiles_old
-files="vimrc gvimrc vim zshrc zsh oh-my-zsh tmux.conf gitignore_global gitconfig"
+files="vimrc gvimrc vim zshrc zsh oh-my-zsh tmux.conf gitignore_global gitconfig fdignore antigenrc"
 dirs="jars sfdev/workspaces sfdev/tests sfdev/backup sfdev/settings sfdev/temp"
 
 ########
