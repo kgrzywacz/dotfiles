@@ -1,4 +1,4 @@
-export FZF_DEFAULT_COMMAND='fd --type f --no-ignore-parent'
+export FZF_DEFAULT_COMMAND='fd --type f'
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
