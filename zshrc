@@ -1,71 +1,73 @@
-source /opt/homebrew/share/antigen/antigen.zsh
-antigen init ~/.antigenrc
+setopt rm_star_wait
+setopt interactive_comments
+setopt correct
+setopt prompt_subst
+setopt ignore_eof
 
-export PATH=/usr/local/opt/node@14/bin:/usr/local/sbin:/usr/local/opt/flex/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kamil/dev/libs:/Users/kamil/.dotnet/tools
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/opt/node@14/bin:$PATH
-export BUILD_XML=~/dev/projects/ant/sf-ant/build.xml
-export BUILD_PROP_DIR=~/dev/projects/salesforce/.settings
-export ANT_SF_HOME=/Users/kamil/dev/libs/ant-salesforce.jar
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '%F{red}!'
+zstyle ':vcs_info:*' stagedstr '%F{yellow}+'
+zstyle ':vcs_info:git:*' formats ' %F{magenta}[%F{green}%b%c%u%f%F{magenta}]'
+zstyle ':vcs_info:git:*' actionformats ' %F{magenta}[%F{green}%b%F{red}|%f%a%c%u%f%F{magenta}]'
+
+precmd() {
+    vcs_info
+    if [[ ! -n ${vcs_info_msg_0_} ]]; then
+        PS1="%~%f "
+    else
+        PS1="%~${vcs_info_msg_0_}%f "
+    fi
+}
+
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        hook_com[unstaged]+='%F{red}*'
+    fi
+}
+
+chpwd() {
+  ls -lrthG
+}
+
 export LC_ALL=en_US.UTF-8
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
-
-fpath=($fpath)
-
-source $HOME/dotfiles/zsh/aliases.zsh
-source $HOME/dotfiles/zsh/functions.zsh
-source $HOME/dotfiles/zsh/fzf_config.zsh
+export TERM="screen-256color"
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 SECRETS=$HOME/dotfiles/zsh/.secrets.zsh
 if [[ -f "$SECRETS" ]]; then
 	source $SECRETS
 fi
 
-source $ZSH/oh-my-zsh.sh
-
-# want your terminal to support 256 color schemes? I do ...
-export TERM="screen-256color"
-# Show contents of directory after cd-ing into it
-chpwd() {
-  ls -lrthG
-}
-
-# Save a ton of history
 HISTSIZE=20000
 HISTFILE=~/.zsh_history
 SAVEHIST=20000
 
-# Enable completion
-autoload -U compinit && compinit
-autoload bashcompinit && bashcompinit
-#source /usr/local/etc/bash_completion.d/az
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
 
-# if you do a 'rm *', Zsh will give you a sanity check!
-setopt RM_STAR_WAIT
-
-# allows you to type Bash style comments on your command line
-# good 'ol Bash
-setopt interactivecomments
-
-# Zsh has a spelling corrector
-setopt CORRECT
-
-set -o ignoreeof
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-                
-#auto_set_profile_based_on_time
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH; # sfdx autocomplete setup
+if type brew &>/dev/null ; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval 
-SFDX_AC_ZSH_SETUP_PATH=/Users/kamil/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH; # sfdx autocomplete setup
 
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source $HOME/dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/dotfiles/zsh/aliases.zsh
+source $HOME/dotfiles/zsh/functions.zsh
+source $HOME/dotfiles/zsh/fzf_config.zsh
