@@ -17,9 +17,7 @@ endif
 
 call plug#begin()
 
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -27,7 +25,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'hashivim/vim-terraform'
-Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'othree/xml.vim'
 Plug 'neoclide/coc.nvim'
 Plug 'neowit/vim-force.com'
