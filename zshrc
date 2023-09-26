@@ -3,6 +3,7 @@ setopt interactive_comments
 setopt correct
 setopt prompt_subst
 setopt ignore_eof
+setopt auto_cd
 
 autoload -Uz vcs_info
 
